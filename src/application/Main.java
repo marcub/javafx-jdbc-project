@@ -14,10 +14,10 @@ public class Main extends Application {
     @Override
     public void start(Stage stage) {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("View.fxml"));
-            Scene scene = new Scene(fxmlLoader.load());
-            stage.setTitle("Hello!");
-            stage.setScene(scene);
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/gui/MainView.fxml"));
+            Scene mainScene = new Scene(fxmlLoader.load());
+            stage.setScene(mainScene);
+            stage.setTitle("Sample JavaFX application");
             stage.show();
         }
         catch(Exception e) {
