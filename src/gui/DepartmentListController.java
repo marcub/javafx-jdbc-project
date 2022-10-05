@@ -1,16 +1,25 @@
 package gui;
 
 import application.Main;
+import gui.util.Alerts;
+import gui.util.Utils;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.Pane;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import model.entities.Department;
 import model.services.DepartmentService;
 
+import javax.swing.text.SimpleAttributeSet;
+import java.io.IOException;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -35,8 +44,8 @@ public class DepartmentListController implements Initializable {
     private TableColumn<Department, String> tableColumnName;
 
     @FXML
-    private void onButtonNewDepartment() {
-        System.out.println("onButtonNewDepartment");
+    private void onButtonNewDepartment(ActionEvent event) {
+        createDialogForm("/gui/DepartmentForm.fxml", Utils.currentStage(event));
     }
 
     public void setDepartmentService(DepartmentService service) {
@@ -65,5 +74,23 @@ public class DepartmentListController implements Initializable {
         observableList = FXCollections.observableArrayList(allDepartments);
         tableViewDepartmentList.setItems(observableList);
 
+    }
+
+    public void createDialogForm(String viewAbsoluteName, Stage parentStage) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(viewAbsoluteName));
+            Pane pane = loader.load();
+
+            Stage dialogStage = new Stage();
+            dialogStage.setTitle("Enter department data");
+            dialogStage.setScene(new Scene(pane));
+            dialogStage.setResizable(false);
+            dialogStage.initOwner(parentStage);
+            dialogStage.initModality(Modality.WINDOW_MODAL);
+            dialogStage.showAndWait();
+        }
+        catch (IOException e) {
+            Alerts.showAlert("IO Exception", "Error loading view", e.getMessage(), Alert.AlertType.ERROR);
+        }
     }
 }
