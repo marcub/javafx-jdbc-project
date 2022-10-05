@@ -11,7 +11,7 @@ import java.util.List;
 
 public class DepartmentDaoJDBC implements DepartmentDao {
 
-    private Connection connection;
+    private final Connection connection;
 
     public DepartmentDaoJDBC(Connection connection) {
         this.connection = connection;

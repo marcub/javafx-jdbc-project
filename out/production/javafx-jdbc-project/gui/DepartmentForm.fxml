@@ -10,8 +10,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.DepartmentFormController">
    <children>
       <GridPane layoutX="29.0" layoutY="55.0" prefHeight="90.0" prefWidth="242.0">
         <columnConstraints>
@@ -27,13 +26,13 @@
          <children>
             <Label text="Id" />
             <Label text="Name" GridPane.rowIndex="1" />
-            <TextField editable="false" GridPane.columnIndex="1" />
-            <TextField GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <Label alignment="CENTER" textAlignment="CENTER" textFill="#e42908" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+            <TextField fx:id="textFieldDepartmentId" editable="false" GridPane.columnIndex="1" />
+            <TextField fx:id="textFieldDepartmentName" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <Label fx:id="labelErrorName" alignment="CENTER" textAlignment="CENTER" textFill="#e42908" GridPane.columnIndex="2" GridPane.rowIndex="1" />
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="10.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
                <children>
-                  <Button mnemonicParsing="false" text="Save" />
-                  <Button mnemonicParsing="false" text="Cancel" />
+                  <Button fx:id="buttonSaveDepartment" mnemonicParsing="false" onAction="#onButtonSaveDepartmentAction" text="Save" />
+                  <Button fx:id="buttonCancelDepartment" mnemonicParsing="false" onAction="#onButtonCancelDepartmentAction" text="Cancel" />
                </children>
             </HBox>
          </children>
