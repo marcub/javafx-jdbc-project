@@ -21,7 +21,7 @@
             <Insets bottom="10.0" top="10.0" />
          </VBox.margin>
       </Label>
-      <Button fx:id="buttonNewDepartment" alignment="CENTER" mnemonicParsing="false" onAction="#onButtonNewDepartment" prefHeight="35.0" prefWidth="606.0" text="New">
+      <Button fx:id="buttonNewDepartment" alignment="CENTER" mnemonicParsing="false" onAction="#onButtonNewDepartmentAction" prefHeight="35.0" prefWidth="606.0" text="New">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
