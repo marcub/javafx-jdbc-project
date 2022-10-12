@@ -8,10 +8,7 @@ import gui.util.Utils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import model.entities.Department;
 import model.entities.Seller;
 import model.exceptions.ValidationException;
@@ -19,6 +16,8 @@ import model.services.DepartmentService;
 import model.services.SellerService;
 
 import java.net.URL;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.*;
 
 public class SellerFormController implements Initializable {
@@ -36,7 +35,19 @@ public class SellerFormController implements Initializable {
     @FXML
     private TextField textFieldSellerName;
     @FXML
+    private TextField textFieldSellerEmail;
+    @FXML
+    private DatePicker datePickerBirthDate;
+    @FXML
+    private TextField textFieldSellerBaseSalary;
+    @FXML
     private Label labelErrorName;
+    @FXML
+    private Label labelErrorEmail;
+    @FXML
+    private Label labelErrorBirthDate;
+    @FXML
+    private Label labelErrorBaseSalary;
 
     public void setSeller(Seller sellerEntity) {
         this.sellerEntity = sellerEntity;
@@ -110,7 +121,10 @@ public class SellerFormController implements Initializable {
 
     private void initializeNodes() {
         Constraints.setTextFieldInteger(textFieldSellerId);
-        Constraints.setTextFieldMaxLength(textFieldSellerName, 40);
+        Constraints.setTextFieldMaxLength(textFieldSellerName, 70);
+        Constraints.setTextFieldMaxLength(textFieldSellerEmail, 100);
+        Constraints.setTextFieldDouble(textFieldSellerBaseSalary);
+        Utils.formatDatePicker(datePickerBirthDate, "dd/MM/yyyy");
     }
 
     public void updateFormData() {
@@ -119,6 +133,12 @@ public class SellerFormController implements Initializable {
         }
         textFieldSellerId.setText(String.valueOf(sellerEntity.getId()));
         textFieldSellerName.setText(sellerEntity.getName());
+        textFieldSellerEmail.setText(sellerEntity.getEmail());
+        Locale.setDefault(Locale.US);
+        textFieldSellerBaseSalary.setText(String.format("%.2f", sellerEntity.getBaseSalary()));
+        if (sellerEntity.getBirthDate() != null) {
+            datePickerBirthDate.setValue(LocalDate.ofInstant(sellerEntity.getBirthDate().toInstant(), ZoneId.systemDefault()));
+        }
     }
 
     private void setErrorMessages(Map<String, String> errors) {
