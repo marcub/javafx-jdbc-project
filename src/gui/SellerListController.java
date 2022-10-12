@@ -66,7 +66,7 @@ public class SellerListController implements Initializable, DataChangeListener {
     @FXML
     private void onButtonNewSellerAction(ActionEvent event) {
         Seller seller = new Seller();
-        createDialogForm(seller, "/gui/DepartmentForm.fxml", Utils.currentStage(event));
+        createDialogForm(seller, "/gui/SellerForm.fxml", Utils.currentStage(event));
     }
 
     public void setSellerService(SellerService service) {
@@ -104,27 +104,27 @@ public class SellerListController implements Initializable, DataChangeListener {
     }
 
     public void createDialogForm(Seller seller, String viewAbsoluteName, Stage parentStage) {
-//        try {
-//            FXMLLoader loader = new FXMLLoader(getClass().getResource(viewAbsoluteName));
-//            Pane pane = loader.load();
-//
-//            SellerFormController controller = loader.getController();
-//            controller.setSeller(seller);
-//            controller.setService(service);
-//            controller.subscribeDataChangeListener(this);
-//            controller.updateFormData();
-//
-//            Stage dialogStage = new Stage();
-//            dialogStage.setTitle("Enter department data");
-//            dialogStage.setScene(new Scene(pane));
-//            dialogStage.setResizable(false);
-//            dialogStage.initOwner(parentStage);
-//            dialogStage.initModality(Modality.WINDOW_MODAL);
-//            dialogStage.showAndWait();
-//        }
-//        catch (IOException e) {
-//            Alerts.showAlert("IO Exception", "Error loading view", e.getMessage(), Alert.AlertType.ERROR);
-//        }
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(viewAbsoluteName));
+            Pane pane = loader.load();
+
+            SellerFormController controller = loader.getController();
+            controller.setSeller(seller);
+            controller.setService(service);
+            controller.subscribeDataChangeListener(this);
+            controller.updateFormData();
+
+            Stage dialogStage = new Stage();
+            dialogStage.setTitle("Enter department data");
+            dialogStage.setScene(new Scene(pane));
+            dialogStage.setResizable(false);
+            dialogStage.initOwner(parentStage);
+            dialogStage.initModality(Modality.WINDOW_MODAL);
+            dialogStage.showAndWait();
+        }
+        catch (IOException e) {
+            Alerts.showAlert("IO Exception", "Error loading view", e.getMessage(), Alert.AlertType.ERROR);
+        }
     }
 
     @Override
