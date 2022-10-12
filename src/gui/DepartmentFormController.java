@@ -1,6 +1,7 @@
 package gui;
 
 import db.DbException;
+import gui.listeners.DataChangeListener;
 import gui.util.Alerts;
 import gui.util.Constraints;
 import gui.util.Utils;
@@ -15,12 +16,16 @@ import model.entities.Department;
 import model.services.DepartmentService;
 
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class DepartmentFormController implements Initializable {
 
     private Department departmentEntity;
     private DepartmentService service;
+
+    private List<DataChangeListener> dataChangeListeners = new ArrayList<>();
     @FXML
     private Button buttonSaveDepartment;
     @FXML
@@ -40,6 +45,10 @@ public class DepartmentFormController implements Initializable {
         this.service = service;
     }
 
+    public void subscribeDataChangeListener(DataChangeListener listener) {
+        this.dataChangeListeners.add(listener);
+    }
+
     @FXML
     public void onButtonSaveDepartmentAction(ActionEvent event) {
         if (departmentEntity == null) {
@@ -51,12 +60,19 @@ public class DepartmentFormController implements Initializable {
         try {
             departmentEntity = getFormData();
             service.saveOrUpdate(departmentEntity);
+            notifyDataChangeListeners();
             Utils.currentStage(event).close();
         }
         catch (DbException e) {
             Alerts.showAlert("Error saving department", null, e.getMessage(), Alert.AlertType.ERROR);
         }
 
+    }
+
+    private void notifyDataChangeListeners() {
+        for (DataChangeListener listener : dataChangeListeners) {
+            listener.onDataChanged();
+        }
     }
 
     private Department getFormData() {
