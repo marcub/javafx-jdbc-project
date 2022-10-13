@@ -7,6 +7,7 @@ import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.stage.Stage;
 import javafx.util.StringConverter;
+import model.entities.Department;
 
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
@@ -98,6 +99,25 @@ public class Utils {
                     return null;
                 }
             }
+        });
+    }
+
+    public static <T> void formatShowDepartmentName(TableColumn<T, Department> tableColumn) {
+        tableColumn.setCellFactory(column -> {
+            TableCell<T, Department> cell = new TableCell<T, Department>() {
+
+                @Override
+                protected void updateItem(Department item, boolean empty) {
+                    super.updateItem(item, empty);
+                    if(empty) {
+                        setText(null);
+                    }
+                    else {
+                        setText(item.getName());
+                    }
+                }
+            };
+            return cell;
         });
     }
 

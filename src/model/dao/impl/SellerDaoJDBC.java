@@ -197,8 +197,8 @@ public class SellerDaoJDBC implements SellerDao {
 
     private Department instantiateDepartment(ResultSet resultSet) throws SQLException {
         Department department = new Department();
-        department.setId(resultSet.getInt("Id"));
-        department.setName(resultSet.getString("Name"));
+        department.setId(resultSet.getInt("DepartmentId"));
+        department.setName(resultSet.getString("DepName"));
         return department;
     }
 

@@ -33,7 +33,7 @@ public class Seller {
     }
 
     public String getName() {
-        return name;
+        return this.name;
     }
 
     public void setName(String name) {
@@ -65,7 +65,7 @@ public class Seller {
     }
 
     public Department getDepartment() {
-        return department;
+        return this.department;
     }
 
     public void setDepartment(Department department) {

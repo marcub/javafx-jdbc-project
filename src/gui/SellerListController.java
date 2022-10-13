@@ -18,6 +18,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.Pane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import model.entities.Department;
 import model.entities.Seller;
 import model.services.DepartmentService;
 import model.services.SellerService;
@@ -58,6 +59,9 @@ public class SellerListController implements Initializable, DataChangeListener {
     private TableColumn<Seller, Double> tableColumnBaseSalary;
 
     @FXML
+    private TableColumn<Seller, Department> tableColumnDepartment;
+
+    @FXML
     private TableColumn<Seller, Seller> tableColumnEdit;
 
     @FXML
@@ -86,6 +90,8 @@ public class SellerListController implements Initializable, DataChangeListener {
         Utils.formatTableColumnDate(tableColumnBirthDate, "dd/MM/yyyy");
         tableColumnBaseSalary.setCellValueFactory(new PropertyValueFactory<>("baseSalary"));
         Utils.formatTableColumnDouble(tableColumnBaseSalary, 2);
+        tableColumnDepartment.setCellValueFactory(new PropertyValueFactory<>(("department")));
+        Utils.formatShowDepartmentName(tableColumnDepartment);
 
         //Dica para fazer o TableView acompanhar o tamanho da janela
         Stage stage = (Stage) Main.getMainScene().getWindow();
@@ -110,7 +116,8 @@ public class SellerListController implements Initializable, DataChangeListener {
 
             SellerFormController controller = loader.getController();
             controller.setSeller(seller);
-            controller.setService(service);
+            controller.setServices(service, new DepartmentService());
+            controller.loadAssociatedObjects();
             controller.subscribeDataChangeListener(this);
             controller.updateFormData();
 
@@ -123,6 +130,7 @@ public class SellerListController implements Initializable, DataChangeListener {
             dialogStage.showAndWait();
         }
         catch (IOException e) {
+            e.printStackTrace();
             Alerts.showAlert("IO Exception", "Error loading view", e.getMessage(), Alert.AlertType.ERROR);
         }
     }
