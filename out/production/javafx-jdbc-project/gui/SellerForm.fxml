@@ -14,11 +14,16 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="268.0" prefWidth="454.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.SellerFormController">
    <children>
-      <GridPane layoutX="69.0" layoutY="47.0" prefHeight="200.0" prefWidth="315.0">
+      <Label layoutX="192.0" layoutY="14.0" text="Registration">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
+      <GridPane layoutX="69.0" layoutY="47.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="200.0" prefWidth="360.0">
         <columnConstraints>
-          <ColumnConstraints hgrow="SOMETIMES" maxWidth="76.20001220703125" minWidth="10.0" prefWidth="49.79998779296875" />
-          <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="137.00001220703123" minWidth="10.0" prefWidth="137.00001220703123" />
-            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="87.39996337890625" minWidth="10.0" prefWidth="61.79998779296875" />
+          <ColumnConstraints halignment="LEFT" hgrow="ALWAYS" maxWidth="76.0" minWidth="76.0" prefWidth="49.79998779296875" />
+          <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" maxWidth="137.00001220703123" minWidth="-Infinity" prefWidth="137.00001220703123" />
+            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="150.0" minWidth="110.0" prefWidth="110.0" />
         </columnConstraints>
         <rowConstraints>
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -30,34 +35,32 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Label text="Id" />
-            <Label text="Name" GridPane.rowIndex="1" />
             <TextField fx:id="textFieldSellerId" editable="false" GridPane.columnIndex="1" />
             <TextField fx:id="textFieldSellerName" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <Label fx:id="labelErrorName" alignment="CENTER" textAlignment="CENTER" textFill="#e42908" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-            <Label text="Email" GridPane.rowIndex="2" />
-            <Label text="BirthDate" GridPane.rowIndex="3" />
-            <Label text="BaseSalary" GridPane.rowIndex="4" />
             <TextField fx:id="textFieldSellerEmail" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <DatePicker fx:id="datePickerBirthDate" GridPane.columnIndex="1" GridPane.rowIndex="3" />
             <TextField fx:id="textFieldSellerBaseSalary" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+            <ComboBox fx:id="comboBoxDepartment" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="10.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="6" GridPane.valignment="CENTER">
                <children>
                   <Button fx:id="buttonSaveSeller" mnemonicParsing="false" onAction="#onButtonSaveSellerAction" text="Save" />
                   <Button fx:id="buttonCancelSeller" mnemonicParsing="false" onAction="#onButtonCancelSellerAction" text="Cancel" />
                </children>
             </HBox>
-            <Label fx:id="labelErrorEmail" textFill="#e42908" GridPane.columnIndex="2" GridPane.rowIndex="2" />
-            <Label fx:id="labelErrorBirthDate" textFill="#e42908" GridPane.columnIndex="2" GridPane.rowIndex="3" />
-            <Label fx:id="labelErrorBaseSalary" textFill="#e42908" GridPane.columnIndex="2" GridPane.rowIndex="4" />
-            <DatePicker fx:id="datePickerBirthDate" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <Label text="Id" />
+            <Label text="Name" GridPane.rowIndex="1" />
+            <Label text="Email" GridPane.rowIndex="2" />
+            <Label text="BirthDate" GridPane.rowIndex="3" />
+            <Label text="BaseSalary" GridPane.rowIndex="4" />
             <Label text="Department" GridPane.rowIndex="5" />
-            <ComboBox fx:id="comboBoxDepartment" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+            <Label fx:id="labelErrorName" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" textAlignment="JUSTIFY" textFill="#e42908" wrapText="true" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+            <Label fx:id="labelErrorEmail" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" textAlignment="JUSTIFY" textFill="#e42908" wrapText="true" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+            <Label fx:id="labelErrorBirthDate" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="&#10;" textAlignment="JUSTIFY" textFill="#e42908" wrapText="true" GridPane.columnIndex="2" GridPane.rowIndex="3">
+               <font>
+                  <Font size="9.0" />
+               </font></Label>
+            <Label fx:id="labelErrorBaseSalary" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" textAlignment="JUSTIFY" textFill="#e42908" wrapText="true" GridPane.columnIndex="2" GridPane.rowIndex="4" />
          </children>
       </GridPane>
-      <Label layoutX="192.0" layoutY="14.0" text="Registration">
-         <font>
-            <Font name="System Bold" size="12.0" />
-         </font>
-      </Label>
    </children>
 </AnchorPane>

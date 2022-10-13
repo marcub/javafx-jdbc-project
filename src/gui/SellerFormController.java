@@ -19,8 +19,10 @@ import model.services.DepartmentService;
 import model.services.SellerService;
 
 import java.net.URL;
+import java.time.Instant;
 import java.time.LocalDate;
 import java.time.ZoneId;
+import java.time.temporal.TemporalField;
 import java.util.*;
 
 public class SellerFormController implements Initializable {
@@ -110,6 +112,29 @@ public class SellerFormController implements Initializable {
         }
         seller.setName(textFieldSellerName.getText());
 
+        if (textFieldSellerEmail.getText() == null || textFieldSellerEmail.getText().trim().equals("")) {
+            exception.addError("email", "Field can't be empty");
+        }
+        seller.setEmail(textFieldSellerEmail.getText());
+
+        if (datePickerBirthDate.getValue() == null) {
+            exception.addError("birthDate", "Field can't be empty");
+        }
+        else if (datePickerBirthDate.getValue().isAfter(LocalDate.now(ZoneId.systemDefault()))) {
+            exception.addError("birthDate", "BirthDate can't be greater than current date");
+        }
+        else {
+            seller.setBirthDate(Date.from(Instant.from(datePickerBirthDate.getValue().atStartOfDay(ZoneId.systemDefault()))));
+        }
+
+
+        if (textFieldSellerBaseSalary.getText() == null || textFieldSellerBaseSalary.getText().trim().equals("")) {
+            exception.addError("baseSalary", "Field can't be empty");
+        }
+        seller.setBaseSalary(Utils.tryParseToDouble(textFieldSellerBaseSalary.getText()));
+
+        seller.setDepartment(comboBoxDepartment.getValue());
+
         if (exception.getErrors().size() > 0) {
             throw exception;
         }
@@ -160,9 +185,13 @@ public class SellerFormController implements Initializable {
     private void setErrorMessages(Map<String, String> errors) {
         Set<String> fields = errors.keySet();
 
-        if (fields.contains("name")) {
-            labelErrorName.setText(errors.get("name"));
-        }
+        labelErrorName.setText((fields.contains("name") ? errors.get("name") : "" ));
+
+        labelErrorEmail.setText((fields.contains("email") ? errors.get("email") : "" ));
+
+        labelErrorBirthDate.setText((fields.contains("birthDate") ? errors.get("birthDate") : "" ));
+
+        labelErrorBaseSalary.setText((fields.contains("baseSalary") ? errors.get("baseSalary") : "" ));
     }
 
     public void loadAssociatedObjects() {
